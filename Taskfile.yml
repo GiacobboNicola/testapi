@@ -1,0 +1,34 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  default:
+    cmds:
+      - echo "{{.GREETING}}"
+    silent: true
+
+  build:
+    cmds:
+      - docker compose build {{.CLI_ARGS}}
+
+  run:
+    cmds:
+      - task: dotenv {{.CLI_ARGS}}
+      - docker compose up postman
+ 
+  test:
+    cmds:
+      - task: dotenv
+      - docker compose up mock -d
+      - docker compose up postman
+      - docker compose stop mock
+
+  dotenv:
+    cmds:
+      - cp ./config/{{.ENV_FILE}} .env
+    vars:
+      ENV_FILE: '{{.CLI_ARGS | default "test" }}'

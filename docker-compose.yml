@@ -1,0 +1,41 @@
+services:
+  mock:
+    image: server/mock
+    hostname: mock
+    container_name: mock
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: server
+    restart: "no"
+    command: 
+      json-server /opt/api/${MOCK_API-api.json}
+    volumes:
+      - ./mock:/opt/api
+    network_mode: "host"
+
+  postman:
+    image: postman/nigia
+    hostname: postman
+    container_name: postman
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      target: postman
+    restart: "no"
+    command: 
+      run ${COLLECTION}
+      -e ${ENVIRONMENT}
+      -r cli,json,htmlextra,csv
+      --reporter-json-export /newman/reports
+      --reporter-htmlextra-export /newman/reports
+      --reporter-csv-export /newman/reports
+    environment:
+      - COLLECTION=${COLLECTION:-testREST.json}
+      - ENVIRONMENT=${ENVIRONMENT:-testENV.json}
+    volumes:
+      - ./collections:/etc/newman
+      - ./logs:/newman/reports
+      - ./data:/data
+    network_mode: "host"
+

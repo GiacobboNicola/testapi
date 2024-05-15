@@ -1,0 +1,13 @@
+{
+	"name": "Test API",
+	"values": [
+		{
+			"key": "USERNAME",
+			"value": "Admin"
+		},
+		{
+			"key": "USERID",
+			"value": 1
+		}
+	]
+}

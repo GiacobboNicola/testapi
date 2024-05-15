@@ -1,0 +1,10 @@
+.env
+collections/*.json
+!collections/testREST.json
+!collections/testENV.json
+config/*
+!config/test
+logs/*
+!logs/.gitkeep
+data/*
+!data/.gitkeep
