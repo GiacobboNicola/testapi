@@ -9,6 +9,7 @@ tasks:
   default:
     cmds:
       - echo "{{.GREETING}}"
+      - go-task --list
     silent: true
 
   build:
@@ -16,11 +17,13 @@ tasks:
       - docker compose build {{.CLI_ARGS}}
 
   run:
+    desc: start service
     cmds:
       - task: dotenv {{.CLI_ARGS}}
       - docker compose up postman
  
   test:
+    desc: start service and test it with mock data
     cmds:
       - task: dotenv
       - docker compose up mock -d

@@ -15,13 +15,9 @@ services:
     network_mode: "host"
 
   postman:
-    image: postman/nigia
+    image: nigia/testapi:latest
     hostname: postman
     container_name: postman
-    build: 
-      context: .
-      dockerfile: Dockerfile
-      target: postman
     restart: "no"
     command: 
       run ${COLLECTION}

@@ -12,7 +12,6 @@ Simple project to use postman in a docker container for testing REST API.
 After downloading the project run the following commands
 
 ```bash
-task build
 task test
 ```
 
@@ -33,4 +32,4 @@ where `YOUR-COLLECTION.json` is the collection file you just added in `/collecti
 In case your collection needs some enviroment variables you can add the file with them in `./collections/` and replace `testENV.json` with its filename in`config-name`.
 >In anycase the file linked to the `ENVIRONMENT` variable cannot be an empty file. So if you don't have any enviroment variable to define just leave `ENVIRONMENT=testENV.json`.
 
-Now you have everything settup and ready to be run. To test your collection just type `task run -- config-name` 
+Now you have everything setup and ready to be run. To test your collection just type `task run -- config-name`.
